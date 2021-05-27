@@ -1,6 +1,7 @@
 package model.services;
 
 import model.entities.CarRental;
+import model.entities.Invoice;
 
 public class RentalServices {
 	private Double pricePerHour;
@@ -55,6 +56,10 @@ public class RentalServices {
 			basicPayment = Math.ceil(hours / 24) * pricePerDay;
 			
 		}
+		double tax = taxService.tax(basicPayment);
+		
+		carRental.setInvoice(new Invoice(basicPayment, tax));
 	}
+	
 
 }
